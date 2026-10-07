@@ -11,6 +11,7 @@ export default class ResourceNode extends WorldObject {
 		status,
 		description,
 		actions,
+		requiredTool,
 		resource,
 		maxAmount,
 		harvestAmount,
@@ -27,6 +28,7 @@ export default class ResourceNode extends WorldObject {
 			actions,
 		});
 
+		this.requiredTool = requiredTool;
 		this.resource = resource;
 		this.maxAmount = maxAmount;
 		this.currentAmount = maxAmount;

@@ -21,6 +21,10 @@ export default class Tool extends Item {
 		this.maxDurability = maxDurability;
 	}
 
+	hasRequiredDurability(amount) {
+		return this.durability >= amount;
+	}
+
 	isBroken() {
 		return this.durability <= 0;
 	}

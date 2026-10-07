@@ -354,6 +354,17 @@ export default class UI {
 		UI.getElementByItemCode(this.inventoryList, itemCode).remove();
 	}
 
+	// EQUIP / UNEQUIP TOOL
+	updateToolEquippedState(itemCode, equipped) {
+		const element = UI.getElementByItemCode(this.inventoryList, itemCode);
+
+		if (!element) {
+			return;
+		}
+
+		element.classList.toggle("equipped", equipped);
+	}
+
 	// --------------------- ACTION WHEEL OVERLAY
 
 	// RENDER ACTION WHEEL

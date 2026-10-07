@@ -16,6 +16,8 @@ export default class Game {
 	init() {
 		this.initWorldObjectEvents();
 
+		this.initInventoryEvents();
+
 		this.initPlayerUI();
 	}
 
@@ -40,6 +42,28 @@ export default class Game {
 			if (!worldObject) return;
 
 			this.selectWorldObject(worldObject);
+		});
+	}
+
+	initInventoryEvents() {
+		this.ui.inventoryList.addEventListener("click", (e) => {
+			const element = e.target.closest(".inventory-item");
+
+			if (!element) return;
+
+			const itemCode = element.dataset.itemCode;
+
+			const inventoryItem = this.player.inventory.findItem(itemCode);
+
+			if (!inventoryItem) return;
+
+			const item = inventoryItem.item;
+
+			if (item.type !== "tool") {
+				return;
+			}
+
+			this.toggleTool(item);
 		});
 	}
 
@@ -184,7 +208,20 @@ export default class Game {
 			return;
 		}
 
-		const harvestedAmount = resourceNode.harvest(resourceNode.harvestAmount);
+		const requiredTool = resourceNode.requiredTool;
+		const tool = this.player.inventory.equippedTools.get(requiredTool);
+
+		if (!tool) {
+			this.ui.sendSystemMessage(
+				`Ai nevoie de un tool de tip ${requiredTool} echipat pentru această acțiune.`,
+			);
+
+			return;
+		}
+
+		const harvestedAmount = resourceNode.harvest(
+			resourceNode.harvestAmount * tool.efficiency,
+		);
 
 		if (harvestedAmount <= 0) {
 			this.ui.sendSystemMessage(
@@ -263,5 +300,33 @@ export default class Game {
 		}
 
 		this.ui.addInventoryItem(uiItem);
+	}
+
+	addTool(tool) {
+		this.player.inventory.addItem(tool);
+
+		this.updateInventoryUI(tool);
+	}
+
+	toggleTool(tool) {
+		const previouslyEquipped = this.player.inventory.equippedTools.get(
+			tool.toolType,
+		);
+
+		const equipped = this.player.inventory.toggleTool(tool);
+
+		if (previouslyEquipped && previouslyEquipped !== tool) {
+			this.ui.updateToolEquippedState(previouslyEquipped.itemCode, false);
+		}
+
+		this.ui.updateToolEquippedState(tool.itemCode, equipped);
+
+		if (equipped) {
+			this.ui.sendSystemMessage(`${tool.name} a fost echipat.`);
+
+			return;
+		}
+
+		this.ui.sendSystemMessage(`${tool.name} a fost dezechipat.`);
 	}
 }

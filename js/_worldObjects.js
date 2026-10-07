@@ -17,6 +17,8 @@ const _worldObjects = {
 
 		description: "Un pin înalt care poate fi tăiat pentru a obține Wood.",
 
+		requiredTool: "axe",
+
 		actions: [_actions.chopAction, _actions.inspectAction],
 
 		resource: _items.wood,
@@ -24,7 +26,7 @@ const _worldObjects = {
 		maxAmount: 10,
 
 		xpReward: 5,
-		harvestAmount: 2,
+		harvestAmount: 1,
 
 		restoreCooldown: 10,
 	}),
@@ -41,6 +43,8 @@ const _worldObjects = {
 
 		description:
 			"O formațiune densă de rocă, bogată în Stone, ce poate fi exploatată cu unelte potrivite.",
+
+		requiredTool: "pickaxe",
 
 		actions: [_actions.mineAction, _actions.inspectAction],
 

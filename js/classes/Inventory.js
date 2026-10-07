@@ -3,6 +3,7 @@
 export default class Inventory {
 	constructor() {
 		this.items = [];
+		this.equippedTools = new Map();
 	}
 
 	findItem(itemCode) {
@@ -25,6 +26,8 @@ export default class Inventory {
 		}
 
 		this.items.push({ item, amount });
+
+		if (item.type === "tool") return "tool";
 	}
 
 	removeItem(itemCode, amount = 1) {
@@ -53,5 +56,30 @@ export default class Inventory {
 		if (!inventoryItem) return 0;
 
 		return inventoryItem.amount;
+	}
+
+	equipTool(tool) {
+		this.equippedTools.set(tool.toolType, tool);
+		console.log(this.equippedTools);
+	}
+
+	unequipTool(tool) {
+		this.equippedTools.delete(tool.toolType);
+	}
+
+	toggleTool(tool) {
+		if (this.isEquipped(tool)) {
+			this.unequipTool(tool);
+
+			return false;
+		}
+
+		this.equipTool(tool);
+
+		return true;
+	}
+
+	isEquipped(tool) {
+		return this.equippedTools.get(tool.toolType) === tool;
 	}
 }
