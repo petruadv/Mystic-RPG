@@ -308,6 +308,16 @@ export default class UI {
 
 	// CREATE INVENTORY ITEM HTML
 	createInventoryItemHTML(itemObj) {
+		const amountOrDurability =
+			itemObj?.type === "tool"
+				? `
+					<span class="inventory-item-durability">
+						${itemObj.durability} / ${itemObj.maxDurability}
+					</span>
+					`
+				: `
+				<span class="inventory-item-quantity"> × ${itemObj.resource.amount} </span>`;
+
 		const html = `
 			<article class="inventory-item" data-item-code='${itemObj.itemCode}'>
 				<div class="inventory-item-icon">${itemObj.resource.icon}</div>
@@ -315,7 +325,7 @@ export default class UI {
 						<div class="inventory-item-header">
 							<span class="inventory-item-name"> ${itemObj.resource.name} </span>
 
-							<span class="inventory-item-quantity"> × ${itemObj.resource.amount} </span>
+							${amountOrDurability}
 						</div>
 
 						<p>
@@ -363,6 +373,16 @@ export default class UI {
 		}
 
 		element.classList.toggle("equipped", equipped);
+	}
+
+	// UPDATE TOOL DURABILITY
+	updateToolDurability(tool) {
+		const toolUI = this.inventoryList.querySelector(
+			`[data-item-code='${tool.itemCode}']`,
+		);
+
+		toolUI.querySelector(".inventory-item-durability").textContent =
+			`${tool.durability} / ${tool.maxDurability}`;
 	}
 
 	// --------------------- ACTION WHEEL OVERLAY

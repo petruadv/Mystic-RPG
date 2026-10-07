@@ -29,7 +29,7 @@ export default class Tool extends Item {
 		return this.durability <= 0;
 	}
 
-	use(amount) {
+	use(amount = 1) {
 		if (this.isBroken()) return;
 
 		if (this.durability < amount) return;

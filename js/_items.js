@@ -36,7 +36,7 @@ const _items = {
 			"Un topor simplu din lemn, folosit pentru tăierea copacilor.",
 		toolType: "axe",
 		efficiency: 1,
-		durability: 50,
+		durability: 5,
 		maxDurability: 50,
 	}),
 

@@ -219,17 +219,20 @@ export default class Game {
 			return;
 		}
 
-		const harvestedAmount = resourceNode.harvest(
-			resourceNode.harvestAmount * tool.efficiency,
-		);
-
-		if (harvestedAmount <= 0) {
+		if (tool.isBroken()) {
 			this.ui.sendSystemMessage(
-				`${resourceNode.name} nu mai are resurse disponibile.`,
+				"Unealta echipata este stricata si nu poate fi folosita",
 			);
 
 			return;
 		}
+
+		tool.use();
+		this.ui.updateToolDurability(tool);
+
+		const harvestedAmount = resourceNode.harvest(
+			resourceNode.harvestAmount * tool.efficiency,
+		);
 
 		this.player.inventory.addItem(resourceNode.resource, harvestedAmount);
 
@@ -292,6 +295,12 @@ export default class Game {
 				amount: inventoryItem.amount,
 			},
 		};
+
+		if (item.type === "tool") {
+			uiItem.type = "tool";
+			uiItem.durability = item.durability;
+			uiItem.maxDurability = item.maxDurability;
+		}
 
 		if (this.ui.hasInventoryItem(item.itemCode)) {
 			this.ui.editInventoryItem(uiItem);

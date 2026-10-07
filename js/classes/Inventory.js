@@ -60,7 +60,6 @@ export default class Inventory {
 
 	equipTool(tool) {
 		this.equippedTools.set(tool.toolType, tool);
-		console.log(this.equippedTools);
 	}
 
 	unequipTool(tool) {

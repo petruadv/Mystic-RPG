@@ -48,8 +48,7 @@ ui.sendSystemMessage(
 game.addWorldObject(_worldObjects.ancientPine);
 game.addWorldObject(_worldObjects.stoneDeposit);
 game.addTool(_items.woodenAxe);
-game.addTool(_items.stoneAxe);
+// game.addTool(_items.stoneAxe);
 game.addTool(_items.woodenPickaxe);
-
 // BUG: cand obtin axe de stone, suprapune wooden axe, amount va fi 2. se updateaza precum ca as avea acel item deja si adauga amount, actualizand nume(stone axe)
 // totodata atunci cand se reproduce situatia de sus, in equipped map ramane wooden axe dar in UI repet, este stone axe
