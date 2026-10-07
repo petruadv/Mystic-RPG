@@ -38,11 +38,11 @@ const _worldObjects = {
 		name: "Stone Deposit",
 		type: "Mine",
 
-		icon: "⛏",
+		icon: "⬢",
 		status: "Ready",
 
 		description:
-			"O formațiune densă de rocă, bogată în Stone, ce poate fi exploatată cu unelte potrivite.",
+			"O formațiune densă de rocă, bogată în Stone, ce poate fi exploatată cu uneltele potrivite.",
 
 		requiredTool: "pickaxe",
 

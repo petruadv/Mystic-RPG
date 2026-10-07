@@ -6,3 +6,7 @@ gold: 'currency-gold'
 
 wood: 'resource-wood'
 stone: 'resource-stone'
+
+> TOOLS
+
+axe: 'tool-age'

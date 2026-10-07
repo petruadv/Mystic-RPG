@@ -49,11 +49,6 @@ export default class ResourceNode extends WorldObject {
 
 		this.currentAmount -= harvestedAmount;
 
-		// replaced with respawn timer
-		// if (this.isDepleted()) {
-		// 	this.setStatus("Depleted");
-		// }
-
 		return harvestedAmount;
 	}
 

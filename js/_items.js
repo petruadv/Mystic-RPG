@@ -36,7 +36,7 @@ const _items = {
 			"Un topor simplu din lemn, folosit pentru tăierea copacilor.",
 		toolType: "axe",
 		efficiency: 1,
-		durability: 5,
+		durability: 50,
 		maxDurability: 50,
 	}),
 
@@ -57,7 +57,7 @@ const _items = {
 		name: "Wooden Pickaxe",
 		icon: "🪓",
 		description:
-			"Un tarnacop simplu din lemn, folosit pentru exploatarea minereurilor.",
+			"Un târnăcop simplu din lemn, folosit pentru exploatarea minereurilor.",
 		toolType: "pickaxe",
 		efficiency: 1,
 		durability: 50,

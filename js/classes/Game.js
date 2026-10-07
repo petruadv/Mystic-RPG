@@ -202,7 +202,7 @@ export default class Game {
 
 		if (!energyUsed) {
 			this.ui.sendSystemMessage(
-				"Nu ai suficienta energie pentru aceasta actiune.",
+				"Nu ai suficientă energie pentru această actiune.",
 			);
 
 			return;
@@ -221,7 +221,7 @@ export default class Game {
 
 		if (tool.isBroken()) {
 			this.ui.sendSystemMessage(
-				"Unealta echipata este stricata si nu poate fi folosita",
+				"Unealta echipată este stricată și nu poate fi folosită.",
 			);
 
 			return;
