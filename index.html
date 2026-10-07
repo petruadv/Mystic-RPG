@@ -1,0 +1,263 @@
+<!doctype html>
+
+<html lang="ro">
+	<head>
+		<meta charset="UTF-8" />
+
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+
+		<title>Mystic RPG</title>
+
+		<!-- Google Fonts -->
+
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+		<link
+			href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap"
+			rel="stylesheet"
+		/>
+
+		<link rel="stylesheet" href="style.css" />
+
+		<script type="module" src="/js/script.js"></script>
+	</head>
+
+	<body>
+		<main class="game-interface">
+			<!-- ==========================================
+              LEFT SIDEBAR
+         =========================================== -->
+
+			<aside class="sidebar character-sidebar">
+				<!-- ======================================
+                 GAME LOGO
+            ======================================= -->
+
+				<div class="game-logo">
+					<span class="logo-symbol"> 🧙‍♀️ </span>
+
+					Mystic RPG
+				</div>
+
+				<!-- ======================================
+                 CHARACTER PROFILE
+            ======================================= -->
+
+				<section class="character-profile">
+					<div class="character-avatar">🧙</div>
+
+					<h1 class="character-name" id="characterName"></h1>
+
+					<p class="character-class" id="characterClass"></p>
+
+					<div class="level-badge" id="levelBadge"></div>
+				</section>
+
+				<!-- ======================================
+                 PLAYER STATS
+            ======================================= -->
+
+				<section class="player-stats">
+					<!-- HEALTH -->
+
+					<div class="stat">
+						<div class="stat-header">
+							<span> Health </span>
+
+							<span id="healthPercent"></span>
+						</div>
+
+						<div class="stat-bar">
+							<div
+								class="stat-progress health-progress"
+								id="healthProgress"
+							></div>
+						</div>
+					</div>
+
+					<!-- ENERGY -->
+
+					<div class="stat">
+						<div class="stat-header">
+							<span> Energy </span>
+
+							<span id="energyPercent"></span>
+						</div>
+
+						<div class="stat-bar">
+							<div
+								class="stat-progress energy-progress"
+								id="energyProgress"
+							></div>
+						</div>
+					</div>
+
+					<!-- EXPERIENCE -->
+
+					<div class="stat">
+						<div class="stat-header">
+							<span> Experience </span>
+
+							<span id="xpPoints"></span>
+						</div>
+
+						<div class="stat-bar">
+							<div
+								class="stat-progress xp-progress"
+								id="xpProgress"
+							></div>
+						</div>
+					</div>
+				</section>
+			</aside>
+
+			<!-- ==========================================
+              GAME CENTER
+         =========================================== -->
+
+			<section class="game-center">
+				<!-- ======================================
+                 WORLD HEADER
+            ======================================= -->
+
+				<header class="world-header">
+					<div>
+						<p class="world-label">CURRENT AREA</p>
+
+						<h2 id="currentArea"></h2>
+					</div>
+
+					<div class="world-info">
+						<div class="world-info-item" id="worldInfoDay"></div>
+
+						<div class="world-info-item" id="worldInfoTime"></div>
+					</div>
+				</header>
+
+				<!-- ======================================
+                 FARM AREA
+            ======================================= -->
+
+				<section class="farm-area">
+					<div class="farm-heading">
+						<div>
+							<p class="section-eyebrow">YOUR LAND</p>
+
+							<h2 id="currentLand"></h2>
+						</div>
+
+						<div class="farm-status" id="farmStatus"></div>
+					</div>
+
+					<p class="farm-description" id="landDescription"></p>
+
+					<!-- ==================================
+                    WORLD OBJECTS
+
+                    Generate dinamic din UI.js
+               =================================== -->
+
+					<div
+						class="world-objects-container"
+						id="worldObjectsContainer"
+					></div>
+				</section>
+
+				<!-- ======================================
+                 GAME LOG
+            ======================================= -->
+
+				<section class="game-log">
+					<div class="game-log-header">
+						<div>
+							<span class="section-eyebrow"> GAME LOG </span>
+
+							<h3>Adventure Journal</h3>
+						</div>
+
+						<div class="journal-status">
+							<span class="journal-status-dot"></span>
+
+							Live
+						</div>
+					</div>
+
+					<!-- ==================================
+                    NARRATOR / SYSTEM FEEDBACK
+               =================================== -->
+
+					<div class="game-log-messages" id="gameLogMessages"></div>
+				</section>
+			</section>
+
+			<!-- ==========================================
+              RIGHT SIDEBAR
+         =========================================== -->
+
+			<aside class="sidebar inventory-sidebar">
+				<!-- ======================================
+                 INVENTORY HEADER
+            ======================================= -->
+
+				<div class="inventory-header">
+					<div>
+						<p class="section-eyebrow">STORAGE</p>
+
+						<h2>Inventory</h2>
+					</div>
+
+					<div class="inventory-weight">12 / 50</div>
+				</div>
+
+				<!-- ======================================
+                 CURRENCIES
+
+                 Generate dinamic din UI.js
+            ======================================= -->
+
+				<div class="inventory-footer" id="currencyContainer"></div>
+
+				<!-- ======================================
+                 INVENTORY LIST
+
+                 Generate dinamic din UI.js
+            ======================================= -->
+
+				<div class="inventory-list" id="inventoryList"></div>
+			</aside>
+		</main>
+
+		<!-- ==========================================
+           ACTION WHEEL OVERLAY
+      =========================================== -->
+
+		<div class="action-wheel-overlay" id="actionWheelOverlay">
+			<div class="action-wheel" id="actionWheel">
+				<div class="action-wheel-ring"></div>
+
+				<!-- ==================================
+                 CANCEL BUTTON
+            =================================== -->
+
+				<button
+					class="action-wheel-cancel"
+					id="actionWheelCancel"
+					type="button"
+				>
+					<span class="action-wheel-cancel-icon"> ✕ </span>
+
+					<span class="action-wheel-cancel-text"> Cancel </span>
+				</button>
+
+				<!-- ==================================
+                 ACTIONS
+
+                 .action-wheel-item va fi generat
+                 dinamic din JavaScript.
+            =================================== -->
+			</div>
+		</div>
+	</body>
+</html>
