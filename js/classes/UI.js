@@ -60,6 +60,8 @@ export default class UI {
 		this.gameLogMessages = document.getElementById("gameLogMessages");
 
 		//          [INVENTORY & RIGHT BAR]
+		// INVENTORY WEIGHT
+		this.inventoryWeight = document.getElementById("inventoryWeight");
 		// CURRENCY CONTAINER
 		this.currencyContainer = document.getElementById("currencyContainer");
 		// INVENTORY LIST
@@ -281,6 +283,11 @@ export default class UI {
 	}
 
 	// --------------------- INVENTORY
+	// SET INVENTORY ITEM COUNT
+	setInventoryItemCount(weight, maxWeight) {
+		this.inventoryWeight.textContent = `${weight} / ${maxWeight}`;
+	}
+
 	// CREATE INVENTORY CURRENCY HTML
 	createInventoryCurrencyHTML(currencyObj) {
 		const html = `

@@ -4,6 +4,7 @@ export default class Inventory {
 	constructor() {
 		this.items = [];
 		this.equippedTools = new Map();
+		this.maxItemCount = 10;
 	}
 
 	findItem(itemCode) {
@@ -46,6 +47,10 @@ export default class Inventory {
 		}
 
 		return removedAmount;
+	}
+
+	getItemCount() {
+		return this.items.length;
 	}
 
 	getItemAmount(itemCode) {

@@ -327,10 +327,16 @@ export default class Game {
 			return;
 		}
 
+		this.ui.setInventoryItemCount(
+			this.player.inventory.items.length,
+			this.player.inventory.maxItemCount,
+		);
 		this.ui.addInventoryItem(uiItem);
 	}
 
 	addTool(tool) {
+		if (this.player.inventory.hasItem(tool.itemCode)) return;
+
 		this.player.inventory.addItem(tool);
 
 		this.updateInventoryUI(tool);
