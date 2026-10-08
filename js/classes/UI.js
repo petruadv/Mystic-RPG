@@ -255,6 +255,15 @@ export default class UI {
 
 		this.gameLogMessages.insertAdjacentHTML("beforeend", html);
 
+		const maxMessageLog = 100;
+		let logLength = this.gameLogMessages.querySelectorAll(".message").length;
+
+		while (logLength > maxMessageLog) {
+			this.gameLogMessages.firstElementChild.remove();
+
+			logLength = this.gameLogMessages.querySelectorAll(".message").length;
+		}
+
 		this.gameLogMessages.scrollTo({
 			top: this.gameLogMessages.scrollHeight,
 			behavior: "smooth",
