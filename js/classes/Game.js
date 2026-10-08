@@ -3,9 +3,10 @@
 import CooldownsManager from "./CooldownsManager.js";
 
 export default class Game {
-	constructor({ player, ui }) {
+	constructor({ player, ui, saveManager }) {
 		this.player = player;
 		this.ui = ui;
+		this.saveManager = saveManager;
 
 		this.worldObjects = [];
 		this.selectedWorldObject = null;
@@ -27,6 +28,14 @@ export default class Game {
 		this.ui.updateCharacterClass(this.player.level);
 
 		this.updatePlayerUI();
+
+		for (const { item } of this.player.inventory.items) {
+			this.updateInventoryUI(item);
+		}
+
+		for (const tool of this.player.inventory.equippedTools.values()) {
+			this.ui.updateToolEquippedState(tool.itemCode, true);
+		}
 	}
 
 	initWorldObjectEvents() {
@@ -198,16 +207,6 @@ export default class Game {
 			return;
 		}
 
-		const energyUsed = this.player.useEnergy(action.energyCost);
-
-		if (!energyUsed) {
-			this.ui.sendSystemMessage(
-				"Nu ai suficientă energie pentru această actiune.",
-			);
-
-			return;
-		}
-
 		const requiredTool = resourceNode.requiredTool;
 		const tool = this.player.inventory.equippedTools.get(requiredTool);
 
@@ -222,6 +221,24 @@ export default class Game {
 		if (tool.isBroken()) {
 			this.ui.sendSystemMessage(
 				"Unealta echipată este stricată și nu poate fi folosită.",
+			);
+
+			return;
+		}
+
+		if (!tool.hasRequiredDurability(1)) {
+			this.ui.sendSystemMessage(
+				"Unealta echipată este stricată și nu poate fi folosită.",
+			);
+
+			return;
+		}
+
+		const energyUsed = this.player.useEnergy(action.energyCost);
+
+		if (!energyUsed) {
+			this.ui.sendSystemMessage(
+				"Nu ai suficientă energie pentru această actiune.",
 			);
 
 			return;
@@ -255,6 +272,8 @@ export default class Game {
 		if (resourceNode.isDepleted()) {
 			this.startResourceRespawn(resourceNode);
 		}
+
+		this.saveManager.save(this.player);
 	}
 
 	executeInspectAction(_, worldObject) {
@@ -315,6 +334,8 @@ export default class Game {
 		this.player.inventory.addItem(tool);
 
 		this.updateInventoryUI(tool);
+
+		this.saveManager.save(this.player);
 	}
 
 	toggleTool(tool) {
@@ -329,6 +350,7 @@ export default class Game {
 		}
 
 		this.ui.updateToolEquippedState(tool.itemCode, equipped);
+		this.saveManager.save(this.player);
 
 		if (equipped) {
 			this.ui.sendSystemMessage(`${tool.name} a fost echipat.`);
