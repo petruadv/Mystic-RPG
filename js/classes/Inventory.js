@@ -21,6 +21,8 @@ export default class Inventory {
 		const existingItem = this.findItem(item.itemCode);
 
 		if (existingItem) {
+			if (existingItem.type === "tool") return;
+
 			existingItem.amount += amount;
 
 			return;

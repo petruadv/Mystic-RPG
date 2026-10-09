@@ -334,16 +334,6 @@ export default class Game {
 		this.ui.addInventoryItem(uiItem);
 	}
 
-	addTool(tool) {
-		if (this.player.inventory.hasItem(tool.itemCode)) return;
-
-		this.player.inventory.addItem(tool);
-
-		this.updateInventoryUI(tool);
-
-		this.saveManager.save(this.player);
-	}
-
 	toggleTool(tool) {
 		const previouslyEquipped = this.player.inventory.equippedTools.get(
 			tool.toolType,
