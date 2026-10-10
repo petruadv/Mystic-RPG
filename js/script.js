@@ -51,7 +51,3 @@ ui.sendSystemMessage(
 
 game.addWorldObject(_worldObjects.ancientPine);
 game.addWorldObject(_worldObjects.stoneDeposit);
-
-game.player.inventory.addItem(
-	_items.stoneAxe,
-); /* adauga itemul dar nu updateaza UI si nici localStorage. Urmeaza sa fac un "collect starter pack" atunci cand esti player nou */

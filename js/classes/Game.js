@@ -189,7 +189,12 @@ export default class Game {
 				break;
 
 			case "inspect":
-				this.executeInspectAction(action, worldObject);
+				this.executeInspectAction(worldObject);
+
+				break;
+
+			case "collect":
+				this.executeCollectAction(worldObject);
 
 				break;
 
@@ -276,8 +281,23 @@ export default class Game {
 		this.saveManager.save(this.player);
 	}
 
-	executeInspectAction(_, worldObject) {
+	executeInspectAction(worldObject) {
 		this.ui.sendNarratorMessage(worldObject.description);
+	}
+
+	executeCollectAction(worldObject) {
+		if (!worldObject.collectables.size) return;
+
+		let collected = "";
+		for (const [amount, item] of worldObject.collectables.entries()) {
+			this.player.inventory.addItem(item, amount);
+
+			this.updateInventoryUI(item);
+			collected += `${item.name}: ${amount} - `;
+		}
+
+		this.ui.sendNarratorMessage(`Ai colectat: ${collected.slice(-3)}`);
+		this.saveManager.save(this.player);
 	}
 
 	updatePlayerUI() {

@@ -33,5 +33,14 @@ const _actions = {
 		name: "Inspect",
 		icon: "🔎",
 	}),
+
+	// COLLECT
+	collectAction: new Action({
+		actionCode: "collect",
+		type: "collect",
+
+		name: "Collect",
+		icon: "✋",
+	}),
 };
 export default _actions;

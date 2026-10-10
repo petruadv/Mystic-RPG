@@ -164,6 +164,11 @@ export default class UI {
 
 	// WORLD OBJECT HTML TEMPLATE
 	createWorldObjectHTML(obj) {
+		let resourceHTML = ``;
+
+		if (obj.resource)
+			resourceHTML = `<span> ${obj.resource.icon} ${obj.resource.name}: ${obj.currentAmount} </span>`;
+
 		const html = `
          <article
 				class="world-object resource-object"
@@ -188,7 +193,7 @@ export default class UI {
 							</p>
 
 						<div class="object-footer">
-							<span> ${obj.resource.icon} ${obj.resource.name}: ${obj.currentAmount} </span>
+							${resourceHTML}
 					   </div>
 				</div>
 			</article>`;

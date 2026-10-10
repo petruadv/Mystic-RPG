@@ -2,6 +2,7 @@
 
 import _actions from "./_actions.js";
 import _items from "./_items.js";
+import Collectable from "./classes/Collectable.js";
 import ResourceNode from "./classes/ResourceNode.js";
 
 const _worldObjects = {
@@ -56,6 +57,21 @@ const _worldObjects = {
 		harvestAmount: 1,
 
 		restoreCooldown: 25,
+	}),
+
+	// MYSTERY BOX
+	mysteryBox: new Collectable({
+		worldObject: "mystery-box",
+		name: "Mystery Box",
+		type: "Mystery Box",
+		icon: "🎁",
+		status: "Ready",
+		description: "O cutie misterioasă cu obiecte cadou care te asteaptă.",
+		actions: [_actions.inspectAction, _actions.collectAction],
+		collectables: new Map([
+			[1, _items.woodenAxe],
+			[5, _items.wood],
+		]),
 	}),
 };
 export default _worldObjects;
