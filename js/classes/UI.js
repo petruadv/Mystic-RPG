@@ -239,9 +239,9 @@ export default class UI {
 	}
 
 	// REMOVE WORLD OBJECT
-	removeWorldObject(worldObject) {
+	removeWorldObject(worldObjectCode) {
 		const element = this.worldObjectsContainer.querySelector(
-			`[data-world-object='${worldObject}']`,
+			`[data-world-object='${worldObjectCode}']`,
 		);
 
 		if (element) element.remove();

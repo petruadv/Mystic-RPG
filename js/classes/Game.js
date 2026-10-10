@@ -97,9 +97,13 @@ export default class Game {
 			return false;
 		}
 
-		this.worldObjects = this.worldObjects.filter(
-			(worldObject) => worldObject.worldObject !== worldObjectCode,
+		const indexInWorldObjectsArray = this.worldObjects.findIndex(
+			(wo) => wo.worldObject === worldObject.worldObject,
 		);
+
+		if (indexInWorldObjectsArray !== -1) {
+			this.worldObjects.splice(indexInWorldObjectsArray, 1);
+		}
 
 		this.ui.removeWorldObject(worldObjectCode);
 
@@ -298,6 +302,11 @@ export default class Game {
 
 		this.ui.sendNarratorMessage(`Ai colectat: ${collected.slice(-3)}`);
 		this.saveManager.save(this.player);
+
+		// Remove if collectOnce is true
+		if (worldObject.collectOnce) {
+			this.removeWorldObject(worldObject.worldObject);
+		}
 	}
 
 	updatePlayerUI() {

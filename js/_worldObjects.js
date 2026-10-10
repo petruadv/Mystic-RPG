@@ -72,6 +72,7 @@ const _worldObjects = {
 			[1, _items.woodenAxe],
 			[5, _items.wood],
 		]),
+		collectOnce: true,
 	}),
 };
 export default _worldObjects;

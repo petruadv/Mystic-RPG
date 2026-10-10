@@ -14,9 +14,11 @@ export default class Collectable extends WorldObject {
 		actions,
 		// individual
 		collectables,
+		collectOnce = true,
 	}) {
 		super({ worldObject, name, type, icon, status, description, actions });
 
 		this.collectables = collectables;
+		this.collectOnce = collectOnce;
 	}
 }
