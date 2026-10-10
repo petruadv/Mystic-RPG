@@ -83,8 +83,12 @@ export default class SaveManager {
 
 		if (exists) return this.load(initialPlayer);
 
-		this.save(initialPlayer);
+		if (initialPlayer) {
+			this.save(initialPlayer);
 
-		return this.load();
+			return this.load();
+		}
+
+		return false;
 	}
 }
