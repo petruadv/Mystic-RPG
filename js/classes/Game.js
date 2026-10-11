@@ -307,6 +307,10 @@ export default class Game {
 		if (worldObject.collectOnce) {
 			this.removeWorldObject(worldObject.worldObject);
 		}
+
+		this.player.redeemedStarter = true;
+
+		this.saveManager.save(this.player);
 	}
 
 	updatePlayerUI() {

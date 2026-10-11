@@ -17,6 +17,7 @@ export default class SaveManager {
 			maxHealth: player.maxHealth,
 			energy: player.energy,
 			maxEnergy: player.maxEnergy,
+			redeemedStarter: player.redeemedStarter,
 			inventory: {
 				items: player.inventory.items.map(({ item, amount }) => ({
 					item: { ...item },

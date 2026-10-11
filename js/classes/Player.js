@@ -16,6 +16,7 @@ export default class Player {
 		maxHealth = 100,
 		energy = 100,
 		maxEnergy = 100,
+		redeemedStarter = false,
 	}) {
 		this.name = name;
 		this.level = level;
@@ -25,6 +26,7 @@ export default class Player {
 		this.maxHealth = maxHealth;
 		this.energy = energy;
 		this.maxEnergy = maxEnergy;
+		this.redeemedStarter = redeemedStarter;
 		this.inventory = new Inventory();
 	}
 

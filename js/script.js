@@ -21,8 +21,8 @@ const game = new Game({
 	saveManager,
 });
 
-// metoda temporara pentru playerii noi(level 1)
-if (player.level === 1) {
+// metoda temporara pentru playerii noi
+if (!player.redeemedStarter) {
 	game.addWorldObject(_worldObjects.mysteryBox);
 }
 
