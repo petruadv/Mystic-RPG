@@ -11,14 +11,6 @@ const saveManager = new SaveManager();
 
 const ui = new UI();
 
-// metoda temporara de a verifica daca jucatorul este nou -> give mystery box
-let starterWorldObjects = [];
-let isNew;
-if (!saveManager.checkExistingPlayer()) {
-	isNew = true;
-	starterWorldObjects.push(_worldObjects.mysteryBox);
-}
-
 const initialPlayer = new Player({ name: "SpongeBob" });
 
 const player = saveManager.checkExistingPlayer(initialPlayer);
@@ -29,10 +21,9 @@ const game = new Game({
 	saveManager,
 });
 
-if (isNew) {
-	starterWorldObjects.forEach((starter) => {
-		game.addWorldObject(_worldObjects.mysteryBox);
-	});
+// metoda temporara pentru playerii noi(level 1)
+if (player.level === 1) {
+	game.addWorldObject(_worldObjects.mysteryBox);
 }
 
 game.init();
