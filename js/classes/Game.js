@@ -161,7 +161,6 @@ export default class Game {
 	async selectWorldObject(worldObject) {
 		this.selectedWorldObject = worldObject;
 
-		console.log(worldObject.getActions());
 		const selectedActionCode = await this.ui.renderActionWheel(
 			worldObject.getActions(),
 		);
@@ -186,7 +185,6 @@ export default class Game {
 	}
 
 	executeActionWorldObject(action, worldObject) {
-		console.log(action, worldObject);
 		switch (action.type) {
 			case "harvest":
 				this.executeHarvestAction(action, worldObject);
@@ -220,7 +218,6 @@ export default class Game {
 
 				break;
 
-			// TODO: functia de drop
 			case "drop":
 				this.player.inventory.dropItem(inventoryItem);
 
@@ -314,7 +311,30 @@ export default class Game {
 	}
 
 	executeInspectAction(element) {
-		this.ui.sendNarratorMessage(element.description);
+		console.log(element);
+		// Inspect in functie de world object sau item in inventar
+		if (element.worldObject) {
+			this.ui.sendNarratorMessage(
+				`${element.description}
+				${element.currentAmount} / ${element.maxAmount} resurse ramase`,
+			);
+
+			return;
+		}
+
+		if (element.type === "tool") {
+			this.ui.sendNarratorMessage(
+				`${element.description} Durability: ${element.durability} / ${element.maxDurability}`,
+			);
+
+			return;
+		}
+
+		if (element.itemCode) {
+			this.ui.sendNarratorMessage(
+				`${element.description} x${this.player.inventory.findItem(element.itemCode).amount}`,
+			);
+		}
 	}
 
 	executeCollectAction(worldObject) {
@@ -328,7 +348,7 @@ export default class Game {
 			collected += `${item.name}: ${amount} - `;
 		}
 
-		this.ui.sendNarratorMessage(`Ai colectat: ${collected.slice(-3)}`);
+		this.ui.sendNarratorMessage(`Ai colectat: ${collected}`.slice(0, -3));
 		this.saveManager.save(this.player);
 
 		// Remove if collectOnce is true

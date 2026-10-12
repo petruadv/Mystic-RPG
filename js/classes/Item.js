@@ -3,8 +3,8 @@ import _actions from "../_actions.js";
 
 export default class Item {
 	static actionsByItemType = {
-		tool: ["toggleEquip", "inspect", "drop"],
-		resource: ["inspect", "drop"],
+		tool: ["toggleEquip", "inspect"],
+		resource: ["drop", "inspect"],
 	};
 
 	static setActions(type) {

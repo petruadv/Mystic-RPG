@@ -495,6 +495,11 @@ export default class UI {
 			this.actionWheel.addEventListener("click", handleActionClick);
 
 			this.actionWheelCancel.addEventListener("click", handleCancel);
+			window.addEventListener("keydown", function (e) {
+				if (e.key === "Escape") {
+					handleCancel();
+				}
+			});
 		});
 	}
 }
