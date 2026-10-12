@@ -9,6 +9,9 @@ import SaveManager from "./classes/SaveManager.js";
 
 const saveManager = new SaveManager();
 
+// DEBUG METHOD
+saveManager.clearLocalStorageData();
+
 const ui = new UI();
 
 const initialPlayer = new Player({ name: "SpongeBob" });
@@ -32,7 +35,7 @@ ui.updateCurrentArea("Whispering Homestead");
 
 ui.updateCurrentLand("Homestead");
 
-ui.updateWorldInfoTime("07:30");
+// ui.updateWorldInfoTime("07:30");
 
 ui.updateWorldInfoDay(1);
 

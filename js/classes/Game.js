@@ -20,6 +20,35 @@ export default class Game {
 		this.initInventoryEvents();
 
 		this.initPlayerUI();
+
+		this.initTime();
+	}
+
+	initTime() {
+		if (this.timeInterval) clearInterval(this.timeInterval);
+
+		const updateTimeUI = (playerTime) => {
+			const time = new Date(playerTime);
+
+			const min = time.getUTCMinutes();
+			const hour = time.getUTCHours();
+
+			const minStr = String(min).padStart(2, "0");
+			const hourStr = String(hour).padStart(2, "0");
+
+			this.ui.updateWorldInfoTime(`${hourStr}:${minStr}`);
+		};
+
+		const callBack = () => {
+			this.player.time += 60 * 1000;
+			this.saveManager.save(this.player);
+
+			updateTimeUI(this.player.time);
+		};
+
+		updateTimeUI(this.player.time);
+
+		this.timeInterval = setInterval(callBack, 1 * 1000);
 	}
 
 	initPlayerUI() {

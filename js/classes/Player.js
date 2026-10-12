@@ -17,6 +17,7 @@ export default class Player {
 		energy = 100,
 		maxEnergy = 100,
 		redeemedStarter = false,
+		time = 8 * 60 * 60 * 1000,
 	}) {
 		this.name = name;
 		this.level = level;
@@ -28,6 +29,7 @@ export default class Player {
 		this.maxEnergy = maxEnergy;
 		this.redeemedStarter = redeemedStarter;
 		this.inventory = new Inventory();
+		this.time = time;
 	}
 
 	useEnergy(amount) {

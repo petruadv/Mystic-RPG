@@ -4,7 +4,7 @@ import _actions from "../_actions.js";
 export default class Item {
 	static actionsByItemType = {
 		tool: ["toggleEquip", "inspect"],
-		resource: ["drop", "inspect"],
+		resource: ["inspect", "drop"],
 	};
 
 	static setActions(type) {

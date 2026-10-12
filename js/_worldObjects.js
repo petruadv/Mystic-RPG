@@ -67,7 +67,7 @@ const _worldObjects = {
 		icon: "🎁",
 		status: "Ready",
 		description: "O cutie misterioasă cu obiecte cadou care te asteaptă.",
-		actions: [_actions.inspect, _actions.collect],
+		actions: [_actions.collect, _actions.inspect],
 		collectables: new Map([
 			[1, _items.woodenAxe],
 			[5, _items.wood],

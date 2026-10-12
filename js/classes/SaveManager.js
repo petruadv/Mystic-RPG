@@ -31,6 +31,7 @@ export default class SaveManager {
 					}),
 				),
 			},
+			time: player.time,
 		};
 
 		localStorage.setItem(STORAGE_KEY, JSON.stringify(savedPlayer));
@@ -91,5 +92,9 @@ export default class SaveManager {
 		}
 
 		return false;
+	}
+
+	clearLocalStorageData() {
+		localStorage.clear();
 	}
 }
