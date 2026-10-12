@@ -55,7 +55,7 @@ export default class Game {
 	}
 
 	initInventoryEvents() {
-		this.ui.inventoryList.addEventListener("click", (e) => {
+		this.ui.inventoryList.addEventListener("click", async (e) => {
 			const element = e.target.closest(".inventory-item");
 
 			if (!element) return;
@@ -68,11 +68,10 @@ export default class Game {
 
 			const item = inventoryItem.item;
 
-			if (item.type !== "tool") {
-				return;
-			}
+			const actionCode = await this.ui.renderActionWheel(item.getActions());
 
-			this.toggleTool(item);
+			if (!item || !actionCode) return;
+			this.executeActionInventoryItem(actionCode, item);
 		});
 	}
 
@@ -162,6 +161,7 @@ export default class Game {
 	async selectWorldObject(worldObject) {
 		this.selectedWorldObject = worldObject;
 
+		console.log(worldObject.getActions());
 		const selectedActionCode = await this.ui.renderActionWheel(
 			worldObject.getActions(),
 		);
@@ -180,12 +180,13 @@ export default class Game {
 			return;
 		}
 
-		this.executeAction(action, worldObject);
+		this.executeActionWorldObject(action, worldObject);
 
 		this.selectedWorldObject = null;
 	}
 
-	executeAction(action, worldObject) {
+	executeActionWorldObject(action, worldObject) {
+		console.log(action, worldObject);
 		switch (action.type) {
 			case "harvest":
 				this.executeHarvestAction(action, worldObject);
@@ -199,6 +200,29 @@ export default class Game {
 
 			case "collect":
 				this.executeCollectAction(worldObject);
+
+				break;
+
+			default:
+				console.error(`Unknown action type: ${action.type}`);
+		}
+	}
+
+	executeActionInventoryItem(action, inventoryItem) {
+		switch (action) {
+			case "inspect":
+				this.executeInspectAction(inventoryItem);
+
+				break;
+
+			case "toggleEquip":
+				this.toggleTool(inventoryItem);
+
+				break;
+
+			// TODO: functia de drop
+			case "drop":
+				this.executeInspectAction(inventoryItem);
 
 				break;
 
@@ -285,8 +309,8 @@ export default class Game {
 		this.saveManager.save(this.player);
 	}
 
-	executeInspectAction(worldObject) {
-		this.ui.sendNarratorMessage(worldObject.description);
+	executeInspectAction(element) {
+		this.ui.sendNarratorMessage(element.description);
 	}
 
 	executeCollectAction(worldObject) {

@@ -20,7 +20,7 @@ const _worldObjects = {
 
 		requiredTool: "axe",
 
-		actions: [_actions.chopAction, _actions.inspectAction],
+		actions: [_actions.chop, _actions.inspect],
 
 		resource: _items.wood,
 
@@ -47,7 +47,7 @@ const _worldObjects = {
 
 		requiredTool: "pickaxe",
 
-		actions: [_actions.mineAction, _actions.inspectAction],
+		actions: [_actions.mine, _actions.inspect],
 
 		resource: _items.stone,
 
@@ -67,7 +67,7 @@ const _worldObjects = {
 		icon: "🎁",
 		status: "Ready",
 		description: "O cutie misterioasă cu obiecte cadou care te asteaptă.",
-		actions: [_actions.inspectAction, _actions.collectAction],
+		actions: [_actions.inspect, _actions.collect],
 		collectables: new Map([
 			[1, _items.woodenAxe],
 			[5, _items.wood],

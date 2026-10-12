@@ -4,7 +4,7 @@ import Action from "./classes/Action.js";
 
 const _actions = {
 	// CHOP
-	chopAction: new Action({
+	chop: new Action({
 		actionCode: "chop",
 		type: "harvest",
 
@@ -15,7 +15,7 @@ const _actions = {
 	}),
 
 	// MINE
-	mineAction: new Action({
+	mine: new Action({
 		actionCode: "mine",
 		type: "harvest",
 
@@ -26,7 +26,7 @@ const _actions = {
 	}),
 
 	// INSPECT
-	inspectAction: new Action({
+	inspect: new Action({
 		actionCode: "inspect",
 		type: "inspect",
 
@@ -35,12 +35,30 @@ const _actions = {
 	}),
 
 	// COLLECT
-	collectAction: new Action({
+	collect: new Action({
 		actionCode: "collect",
 		type: "collect",
 
 		name: "Collect",
 		icon: "✋",
+	}),
+
+	// DROP
+	drop: new Action({
+		actionCode: "drop",
+		type: "drop",
+
+		name: "Drop",
+		icon: "❌",
+	}),
+
+	// EQUIP
+	toggleEquip: new Action({
+		actionCode: "toggleEquip",
+		type: "toggleEquip",
+
+		name: "Equip / Unequip",
+		icon: "❌",
 	}),
 };
 export default _actions;
