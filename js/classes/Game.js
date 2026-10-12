@@ -222,7 +222,11 @@ export default class Game {
 
 			// TODO: functia de drop
 			case "drop":
-				this.executeInspectAction(inventoryItem);
+				this.player.inventory.dropItem(inventoryItem);
+
+				this.ui.removeInventoryItem(inventoryItem.itemCode);
+
+				this.saveManager.save(this.player);
 
 				break;
 

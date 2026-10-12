@@ -33,6 +33,17 @@ export default class Inventory {
 		if (item.type === "tool") return "tool";
 	}
 
+	dropItem(itemObj) {
+		const index = this.items.findIndex(
+			(item) => item.item.itemCode === itemObj.itemCode,
+		);
+
+		if (index !== -1) {
+			this.items.splice(index, 1);
+			this.equippedTools.delete(itemObj.toolType);
+		}
+	}
+
 	removeItem(itemCode, amount = 1) {
 		if (amount <= 0) return;
 
