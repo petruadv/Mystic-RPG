@@ -20,4 +20,8 @@ export default class Time {
 
 		return { min, hour, day };
 	}
+
+	checkFullHour() {
+		return this.getFormattedTime().min === 0;
+	}
 }

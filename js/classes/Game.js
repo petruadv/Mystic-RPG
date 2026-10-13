@@ -44,9 +44,14 @@ export default class Game {
 		this.timeInterval = setInterval(() => {
 			this.player.time = this.time.elapseTime();
 
-			this.saveManager.save(this.player);
-
 			updateTimeUI();
+
+			// OTHER PLAYER EVENTS
+			if (this.time.checkFullHour() && this.player.energy !== 100) {
+				this.handlePlayerRestoreEnergy();
+			}
+
+			this.saveManager.save(this.player);
 		}, 1 * 1000);
 	}
 
@@ -464,5 +469,14 @@ export default class Game {
 		}
 
 		this.ui.sendSystemMessage(`${tool.name} a fost dezechipat.`);
+	}
+
+	handlePlayerRestoreEnergy() {
+		// RESTORE 5 ENERGY POINTS
+		const addedEnergy = 5;
+
+		this.player.restoreEnergy(addedEnergy);
+
+		this.ui.updateEnergy(this.player.energy);
 	}
 }

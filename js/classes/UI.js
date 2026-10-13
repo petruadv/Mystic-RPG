@@ -106,7 +106,7 @@ export default class UI {
 	}
 
 	// UPDATE ENERGY
-	updateEnergy(currentEnergy, maxEnergy) {
+	updateEnergy(currentEnergy, maxEnergy = 100) {
 		// Update ENERGY Percent
 		this.energyPercent.textContent = `${currentEnergy} / ${maxEnergy}`;
 
