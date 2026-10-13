@@ -1,12 +1,15 @@
 "use strict";
 
 import CooldownsManager from "./CooldownsManager.js";
+import Time from "./Time.js";
 
 export default class Game {
 	constructor({ player, ui, saveManager }) {
 		this.player = player;
 		this.ui = ui;
 		this.saveManager = saveManager;
+
+		this.time = new Time({ time: this.player.time });
 
 		this.worldObjects = [];
 		this.selectedWorldObject = null;
@@ -27,8 +30,8 @@ export default class Game {
 	initTime() {
 		if (this.timeInterval) clearInterval(this.timeInterval);
 
-		const updateTimeUI = (playerTime) => {
-			const time = new Date(playerTime);
+		const updateTimeUI = () => {
+			const time = new Date(this.player.time);
 
 			const min = time.getUTCMinutes();
 			const hour = time.getUTCHours();
@@ -38,17 +41,15 @@ export default class Game {
 
 			this.ui.updateWorldInfoTime(`${hourStr}:${minStr}`);
 		};
+		updateTimeUI();
 
-		const callBack = () => {
-			this.player.time += 60 * 1000;
+		this.timeInterval = setInterval(() => {
+			this.player.time = this.time.elapseTime();
+
 			this.saveManager.save(this.player);
 
-			updateTimeUI(this.player.time);
-		};
-
-		updateTimeUI(this.player.time);
-
-		this.timeInterval = setInterval(callBack, 1 * 1000);
+			updateTimeUI();
+		}, 1 * 1000);
 	}
 
 	initPlayerUI() {
@@ -374,7 +375,7 @@ export default class Game {
 			this.player.inventory.addItem(item, amount);
 
 			this.updateInventoryUI(item);
-			collected += `${item.name}: ${amount} - `;
+			collected += `${item.name}: ${amount} & `;
 		}
 
 		this.ui.sendNarratorMessage(`Ai colectat: ${collected}`.slice(0, -3));

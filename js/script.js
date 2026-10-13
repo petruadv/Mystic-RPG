@@ -10,7 +10,7 @@ import SaveManager from "./classes/SaveManager.js";
 const saveManager = new SaveManager();
 
 // DEBUG METHOD
-saveManager.clearLocalStorageData();
+// saveManager.clearLocalStorageData();
 
 const ui = new UI();
 
