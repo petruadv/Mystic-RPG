@@ -35,10 +35,6 @@ ui.updateCurrentArea("Whispering Homestead");
 
 ui.updateCurrentLand("Homestead");
 
-// ui.updateWorldInfoTime("07:30");
-
-ui.updateWorldInfoDay(1);
-
 ui.updateFarmStatus({
 	icon: "☀",
 	status: "Warm Morning",

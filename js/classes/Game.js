@@ -31,15 +31,13 @@ export default class Game {
 		if (this.timeInterval) clearInterval(this.timeInterval);
 
 		const updateTimeUI = () => {
-			const time = new Date(this.player.time);
-
-			const min = time.getUTCMinutes();
-			const hour = time.getUTCHours();
+			const { min, hour, day } = this.time.getFormattedTime();
 
 			const minStr = String(min).padStart(2, "0");
 			const hourStr = String(hour).padStart(2, "0");
 
 			this.ui.updateWorldInfoTime(`${hourStr}:${minStr}`);
+			this.ui.updateWorldInfoDay(day);
 		};
 		updateTimeUI();
 
