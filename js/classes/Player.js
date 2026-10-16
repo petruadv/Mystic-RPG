@@ -18,6 +18,7 @@ export default class Player {
 		maxEnergy = 100,
 		redeemedStarter = false,
 		time = 8 * 60 * 60 * 1000,
+		currencies = new Map(),
 	}) {
 		this.name = name;
 		this.level = level;
@@ -28,6 +29,7 @@ export default class Player {
 		this.energy = energy;
 		this.maxEnergy = maxEnergy;
 		this.redeemedStarter = redeemedStarter;
+		this.currencies = currencies;
 		this.inventory = new Inventory();
 		this.time = time;
 	}

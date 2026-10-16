@@ -316,10 +316,14 @@ export default class UI {
 
 	// EDIT INVENTORY CURRENCY
 	editInventoryCurrency(currencyObjUpdated) {
-		UI.getElementByItemCode(
+		const element = UI.getElementByItemCode(
 			this.currencyContainer,
 			currencyObjUpdated.itemCode,
-		).outerHTML = this.createInventoryCurrencyHTML(currencyObjUpdated);
+		);
+
+		if (!element) return;
+
+		element.outerHTML = this.createInventoryCurrencyHTML(currencyObjUpdated);
 	}
 
 	// REMOVE INVENTORY CURRENCY

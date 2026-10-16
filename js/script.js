@@ -55,3 +55,16 @@ ui.sendSystemMessage(
 
 game.addWorldObject(_worldObjects.ancientPine);
 game.addWorldObject(_worldObjects.stoneDeposit);
+
+// ui.addInventoryCurrency({
+// 	name: "Gold",
+// 	itemCode: "currency-gold",
+// 	icon: "🥇",
+// 	amount: 10,
+// });
+// ui.editInventoryCurrency({
+// 	name: "Gold",
+// 	itemCode: "currency-gold",
+// 	icon: "🥇",
+// 	amount: 11,
+// });

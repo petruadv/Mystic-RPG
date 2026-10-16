@@ -18,6 +18,7 @@ export default class SaveManager {
 			energy: player.energy,
 			maxEnergy: player.maxEnergy,
 			redeemedStarter: player.redeemedStarter,
+			currencies: [...player.currencies],
 			inventory: {
 				items: player.inventory.items.map(({ item, amount }) => ({
 					item: { ...item },
@@ -76,6 +77,9 @@ export default class SaveManager {
 
 			this.save(player);
 		}
+
+		const currencyMap = new Map([...player.currencies]);
+		player.currencies = currencyMap;
 
 		return player;
 	}
