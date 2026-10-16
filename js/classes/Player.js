@@ -94,4 +94,17 @@ export default class Player {
 
 		this.maxXP = Math.round(this.maxXP * 1.2);
 	}
+
+	addCurrency(currencyName, currencyAmount) {
+		if (this.currencies.has(currencyName)) {
+			const amountHad = this.currencies.get(currencyName);
+
+			this.currencies.set(currencyName, currencyAmount + amountHad);
+			console.log(this.currencies);
+
+			return;
+		}
+
+		this.currencies.set(currencyName, currencyAmount);
+	}
 }

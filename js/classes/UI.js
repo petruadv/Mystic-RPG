@@ -293,8 +293,8 @@ export default class UI {
 		this.inventoryWeight.textContent = `${weight} / ${maxWeight}`;
 	}
 
-	// CREATE INVENTORY CURRENCY HTML
-	createInventoryCurrencyHTML(currencyObj) {
+	// CREATE PLAYER CURRENCY HTML
+	createPlayerCurrencyHTML(currencyObj) {
 		const html = `
 			<div class="currency-row" data-item-code='${currencyObj.itemCode}'>
 			<span> ${currencyObj.icon} ${currencyObj.name} </span>
@@ -306,16 +306,16 @@ export default class UI {
 		return html;
 	}
 
-	// ADD INVENTORY CURRENCY
-	addInventoryCurrency(currencyObj) {
+	// ADD PLAYER CURRENCY
+	addPlayerCurrency(currencyObj) {
 		this.currencyContainer.insertAdjacentHTML(
 			"beforeend",
-			this.createInventoryCurrencyHTML(currencyObj),
+			this.createPlayerCurrencyHTML(currencyObj),
 		);
 	}
 
-	// EDIT INVENTORY CURRENCY
-	editInventoryCurrency(currencyObjUpdated) {
+	// EDIT PLAYER CURRENCY
+	editPlayerCurrency(currencyObjUpdated) {
 		const element = UI.getElementByItemCode(
 			this.currencyContainer,
 			currencyObjUpdated.itemCode,
@@ -326,12 +326,17 @@ export default class UI {
 		element.outerHTML = this.createInventoryCurrencyHTML(currencyObjUpdated);
 	}
 
-	// REMOVE INVENTORY CURRENCY
-	removeInventoryCurrency(itemCode) {
+	// CHECK IF PLAYER HAS A SPECIFIC CURRENCY IN UI
+	checkHasCurrency(itemCode) {
+		return UI.getElementByItemCode(this.currencyContainer, itemCode);
+	}
+
+	// REMOVE PLAYER CURRENCY
+	removePlayerCurrency(itemCode) {
 		UI.getElementByItemCode(this.currencyContainer, itemCode).remove();
 	}
 
-	// CREATE INVENTORY ITEM HTML
+	// CREATE PLAYER ITEM HTML
 	createInventoryItemHTML(itemObj) {
 		const amountOrDurability =
 			itemObj?.type === "tool"

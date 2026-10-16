@@ -2,6 +2,7 @@
 
 import _actions from "./_actions.js";
 import _items from "./_items.js";
+import _templates from "./_templates.js";
 import Collectable from "./classes/Collectable.js";
 import ResourceNode from "./classes/ResourceNode.js";
 
@@ -71,6 +72,7 @@ const _worldObjects = {
 		collectables: new Map([
 			[1, _items.woodenAxe],
 			[5, _items.wood],
+			[10, _templates.currencyGold],
 		]),
 		collectOnce: true,
 	}),

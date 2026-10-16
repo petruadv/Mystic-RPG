@@ -1,5 +1,6 @@
 "use strict";
 
+import _templates from "../_templates.js";
 import CooldownsManager from "./CooldownsManager.js";
 import Time from "./Time.js";
 
@@ -68,6 +69,15 @@ export default class Game {
 
 		for (const tool of this.player.inventory.equippedTools.values()) {
 			this.ui.updateToolEquippedState(tool.itemCode, true);
+		}
+
+		for (const [currency, amount] of this.player.currencies.entries()) {
+			const currencyObj = Object.values(_templates).find(
+				(el) => el.name.toLowerCase() === currency,
+			);
+			currencyObj.amount = amount;
+
+			this.ui.addPlayerCurrency(currencyObj);
 		}
 	}
 
@@ -375,9 +385,19 @@ export default class Game {
 
 		let collected = "";
 		for (const [amount, item] of worldObject.collectables.entries()) {
-			this.player.inventory.addItem(item, amount);
+			if (item.itemCode.includes("currency")) {
+				this.player.addCurrency(item.name.toLowerCase(), amount);
 
-			this.updateInventoryUI(item);
+				const currencyObj = _templates.currencyGold;
+				currencyObj.amount = this.player.currencies.get(item.name);
+
+				this.updatePlayerCurrencyUI(currencyObj);
+			} else {
+				this.player.inventory.addItem(item, amount);
+
+				this.updateInventoryUI(item);
+			}
+
 			collected += `${item.name}: ${amount} & `;
 		}
 
@@ -406,6 +426,16 @@ export default class Game {
 
 	updateResourceNodeUI(resourceNode) {
 		this.ui.editWorldObject(resourceNode.worldObject, resourceNode);
+	}
+
+	updatePlayerCurrencyUI(currencyObj) {
+		if (this.ui.checkHasCurrency(currencyObj.itemCode)) {
+			this.ui.editPlayerCurrency(currencyObj);
+
+			return;
+		}
+
+		this.ui.addPlayerCurrency(currencyObj);
 	}
 
 	updateInventoryUI(item) {

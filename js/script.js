@@ -68,3 +68,5 @@ game.addWorldObject(_worldObjects.stoneDeposit);
 // 	icon: "🥇",
 // 	amount: 11,
 // });
+
+// player.addCurrency("gold", 20);
