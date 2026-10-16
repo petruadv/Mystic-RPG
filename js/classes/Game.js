@@ -338,6 +338,8 @@ export default class Game {
 
 		this.updateInventoryUI(resourceNode.resource);
 
+		this.renderPlayerCurrencyUI();
+
 		this.ui.sendNarratorMessage(
 			`Ai colectat ${harvestedAmount} ${resourceNode.resource.name} din ${resourceNode.name}.`,
 		);
@@ -389,7 +391,9 @@ export default class Game {
 				this.player.addCurrency(item.name.toLowerCase(), amount);
 
 				const currencyObj = _templates.currencyGold;
-				currencyObj.amount = this.player.currencies.get(item.name);
+				currencyObj.amount = this.player.currencies.get(
+					item.name.toLowerCase(),
+				);
 
 				this.updatePlayerCurrencyUI(currencyObj);
 			} else {
@@ -436,6 +440,19 @@ export default class Game {
 		}
 
 		this.ui.addPlayerCurrency(currencyObj);
+	}
+
+	renderPlayerCurrencyUI() {
+		this.ui.currencyContainer.innerHTML = "";
+
+		for (const [currency, amount] of this.player.currencies.entries()) {
+			const currencyObj = Object.values(_templates).find(
+				(el) => el.name.toLowerCase() === currency,
+			);
+			currencyObj.amount = amount;
+
+			this.ui.addPlayerCurrency(currencyObj);
+		}
 	}
 
 	updateInventoryUI(item) {

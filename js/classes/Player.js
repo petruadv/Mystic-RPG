@@ -1,6 +1,7 @@
 "use strict";
 
 import Inventory from "./Inventory.js";
+import level_up_bonus from "../_level_up_bonus.js";
 
 export default class Player {
 	static zeroOrLess(amount) {
@@ -90,9 +91,26 @@ export default class Player {
 	}
 
 	levelUp() {
-		this.level++;
+		this.applyLevelUpBonus();
 
 		this.maxXP = Math.round(this.maxXP * 1.2);
+
+		this.level++;
+	}
+
+	applyLevelUpBonus() {
+		const levelBonus = level_up_bonus[this.level];
+
+		if (!levelBonus) return;
+
+		for (const category in levelBonus) {
+			for (const item in levelBonus[category]) {
+				const currencyName = item;
+				const currencyAmount = levelBonus[category][item];
+
+				this.addCurrency(currencyName, currencyAmount);
+			}
+		}
 	}
 
 	addCurrency(currencyName, currencyAmount) {
@@ -100,7 +118,6 @@ export default class Player {
 			const amountHad = this.currencies.get(currencyName);
 
 			this.currencies.set(currencyName, currencyAmount + amountHad);
-			console.log(this.currencies);
 
 			return;
 		}

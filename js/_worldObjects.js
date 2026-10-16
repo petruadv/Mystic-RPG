@@ -27,7 +27,7 @@ const _worldObjects = {
 
 		maxAmount: 10,
 
-		xpReward: 5,
+		xpReward: 50,
 		harvestAmount: 1,
 
 		restoreCooldown: 10,

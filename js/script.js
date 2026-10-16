@@ -12,11 +12,11 @@ const saveManager = new SaveManager();
 // DEBUG METHOD
 // saveManager.clearLocalStorageData();
 
-const ui = new UI();
-
 const initialPlayer = new Player({ name: "SpongeBob" });
 
 const player = saveManager.checkExistingPlayer(initialPlayer);
+
+const ui = new UI();
 
 const game = new Game({
 	player,
